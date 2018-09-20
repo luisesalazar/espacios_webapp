@@ -1,7 +1,7 @@
-# espacios_webapp
+# Espacios webapp
 Internal employee directory
 
-#Requirements:
+# Requirements:
 1. The demo should be implemented using Laravel 5, MySQL, and Bootstrap.
 2. We would like an internal employee directory so all of our employees can search our database of 10,000 employees
 3. We would like employees to be able to log in and be able to search the database
