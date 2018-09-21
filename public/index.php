@@ -56,5 +56,4 @@ $response->send();
 
 $kernel->terminate($request, $response);
 
-
-require_once '../vendor/fzaninotto/Faker/src/autoload.php';
+require __DIR__.'/../vendor/fzaninotto/faker/src/autoload.php';
