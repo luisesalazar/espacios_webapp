@@ -55,3 +55,6 @@ $response = $kernel->handle(
 $response->send();
 
 $kernel->terminate($request, $response);
+
+
+require_once '../vendor/fzaninotto/Faker/src/autoload.php';
