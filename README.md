@@ -14,6 +14,6 @@ A typical directory entry has the following information:
     * Email
 
 # User demo
-[Project's link](http://http://138.68.45.212)
+[Project's link](http://138.68.45.212)
 
 demo@demo.com / demo
