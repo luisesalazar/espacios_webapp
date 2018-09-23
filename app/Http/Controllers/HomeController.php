@@ -1,5 +1,5 @@
 <?php namespace espacios\Http\Controllers;
-
+use espacios\User;
 class HomeController extends Controller {
 
 	/*
@@ -30,7 +30,9 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		return view('home');
+
+            $data["users"]= User::all();
+            return view('home', $data);
 	}
 
 }

@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use espacios\User;
 
 class DatabaseSeeder extends Seeder {
 
@@ -17,27 +16,5 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('UserTableSeeder');
 	}
-
-}
-
-class UserTableSeeder extends Seeder {
-
-    public function run()
-    {
-        $faker = Faker\Factory::create();
-
-        DB::table('users')->delete();
-
-        for ($i=1; $i<=100;$i++){
-            User::create([
-                'email' => $faker->unique()->email,
-                'name'=> $faker->name,
-                'password'=> bcrypt('demo'),
-                'job_title'=> $faker->jobTitle,
-                'location'=> $faker->cityPrefix
-            ]);
-        }
-        
-    }
 
 }

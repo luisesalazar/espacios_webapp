@@ -12,3 +12,8 @@ A typical directory entry has the following information:
     * Job Title
     * Location
     * Email
+
+# User demo
+[Project's link](http://104.248.216.175)
+
+demo@demo.com / demo
