@@ -26,7 +26,8 @@
         "espacios\\Providers\\BusServiceProvider",
         "espacios\\Providers\\ConfigServiceProvider",
         "espacios\\Providers\\EventServiceProvider",
-        "espacios\\Providers\\RouteServiceProvider"
+        "espacios\\Providers\\RouteServiceProvider",
+        "Yajra\\Datatables\\DatatablesServiceProvider"
     ],
     "eager": [
         "Illuminate\\Auth\\AuthServiceProvider",
@@ -44,7 +45,8 @@
         "espacios\\Providers\\BusServiceProvider",
         "espacios\\Providers\\ConfigServiceProvider",
         "espacios\\Providers\\EventServiceProvider",
-        "espacios\\Providers\\RouteServiceProvider"
+        "espacios\\Providers\\RouteServiceProvider",
+        "Yajra\\Datatables\\DatatablesServiceProvider"
     ],
     "deferred": {
         "command.app.name": "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider",

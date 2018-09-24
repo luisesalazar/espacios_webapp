@@ -145,6 +145,7 @@ return [
 		'espacios\Providers\EventServiceProvider',
 		'espacios\Providers\RouteServiceProvider',
 
+                'Yajra\Datatables\DatatablesServiceProvider'
 	],
 
 	/*

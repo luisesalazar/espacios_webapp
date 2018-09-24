@@ -19,17 +19,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($users as $user)
-                                    <tr>
-                                        <td>{{$user->name}}</td>
-                                        <td>{{$user->email}}</td>
-                                        <td>{{$user->job_title}}</td>
-                                        <td>{{$user->location}}</td>
-                                        <td>{{$user->created_at}}</td>
-                                        <td></td>
-                                    </tr>
-
-                                @endforeach
+                                
                                 </tbody>
                             </table>
                         </div>
@@ -42,7 +32,7 @@
     <script src="{{asset('js/pages/directory.js')}}"></script>
     <script type="text/javascript">
         $(document).ready(function(){
-            Directory.loadUsers("{{ url('home/loadUsers') }}");
+            Directory.loadUsers("{{ url('loadUsers') }}");
         });
     </script>
 @endpush

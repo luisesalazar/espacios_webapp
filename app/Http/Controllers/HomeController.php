@@ -1,5 +1,8 @@
-<?php namespace espacios\Http\Controllers;
+<?php 
+namespace espacios\Http\Controllers;
+use Illuminate\Http\Request;
 use espacios\User;
+use Datatables;
 class HomeController extends Controller {
 
 	/*
@@ -30,9 +33,15 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-
-            $data["users"]= User::all();
-            return view('home', $data);
+            return view('home');
 	}
+
+        function loadUsers(Request $request) {
+            if ($request->ajax()) {
+                $users = User::select(['id','name','email','job_title','location','created_at']);
+
+                return Datatables::of($users)->make(true);
+            }
+        }
 
 }
