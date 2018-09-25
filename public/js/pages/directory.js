@@ -16,11 +16,8 @@ var Directory = {
                 {data: 'job_title', name: 'job_title'},
                 {data: 'location', name: 'location'},
                 {data: 'created_at', name: 'created_at'},
-                {data: function (row, type, set) {
-                        return '<a href="#!" class="btn btn-danger" data-user-id="' + row.id + '">Eliminar</a>';
-                    }
-                }
-            ]
+                {data: 'action', name: 'action', orderable: false, searchable: false}
+            ],
         });
     }
 }

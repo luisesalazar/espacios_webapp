@@ -11,10 +11,15 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'UserController@index');
 
-Route::get('home', 'HomeController@index');
-Route::get('loadUsers', 'HomeController@loadUsers');
+Route::get('home', 'UserController@index');
+Route::get('user/list', 'UserController@loadUsers');
+Route::get('user/add', 'UserController@addUser');
+Route::post('user/register', 'UserController@createUser');
+Route::get('user/edit/{user_id}', 'UserController@editUser');
+Route::post('user/save', 'UserController@saveUser');
+
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
