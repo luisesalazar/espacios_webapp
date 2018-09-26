@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use espacios\User;
 use Datatables;
 use Validator;
+use Auth;
 
 class UserController extends Controller {
     /*
@@ -43,7 +44,7 @@ class UserController extends Controller {
      */
     function loadUsers(Request $request) {
         if ($request->ajax()) {
-            $users = User::select(['id', 'name', 'email', 'job_title', 'location', 'created_at']);
+            $users = User::select(['id', 'name', 'email', 'job_title', 'location', 'created_at'])->where('id','!=', Auth::id());
 
             return Datatables::of($users)
                             ->addColumn('action', function ($user) {
