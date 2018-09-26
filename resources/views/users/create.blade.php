@@ -18,7 +18,7 @@
                     </div>
                     @endif
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('user/register') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('user/store') }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                         <div class="form-group">
@@ -65,8 +65,11 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4 text-right">
+                                <a href="{{url('/')}}" class="btn btn-default">
+                                    Cancel
+                                </a>
                                 <button type="submit" class="btn btn-primary">
-                                    Register
+                                    <i class="fa fa-cloud-download-alt"></i> Register
                                 </button>
                             </div>
                         </div>

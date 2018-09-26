@@ -28,10 +28,10 @@ class UserController extends Controller {
     }
 
     /**
-     * Show the application dashboard to the user.
-     *
-     * @return Response
-     */
+    * Display a listing of the resource.
+    *
+    * @return Response
+    */
     public function index() {
         return view('users/list');
     }
@@ -47,8 +47,8 @@ class UserController extends Controller {
 
             return Datatables::of($users)
                             ->addColumn('action', function ($user) {
-                                return '<a href="'.url('user/edit/'.$user->id).'" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Edit</a>'
-                                        . '<a href="#!" data-user-id=' . $user->id . ' class="btn btn-xs btn-danger pull-right"><i class="fa fa-trash"></i> Remove</a>';
+                                return '<a href="' . url('user/edit/' . $user->id) . '" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Edit</a>'
+                                        . '<a href="#!" data-route="' . url('user/destroy/' . $user->id) . '" data-token="'.  csrf_token() .'" data-user-id=' . $user->id . ' data-question="Do you want to remove '.$user->name.'?" class="btn btn-xs btn-danger pull-right btn-remove"><i class="fa fa-trash"></i> Remove</a>';
                             })
                             ->editColumn('created_at', function ($user) {
                                 return $user->created_at->format('M d, Y');
@@ -58,40 +58,30 @@ class UserController extends Controller {
     }
 
     /**
-     * Form to create users
+     * Show the form for creating a new resource.
      *
-     * @return user register view
+     * @return Response
      */
-    function addUser() {
-        return View('users/register');
+    public function create() {
+        return View('users/create');
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Store a newly created resource in storage.
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @return Response
      */
-    public function validator(array $data) {
-        return Validator::make($data, [
-                    'name' => 'required|max:255',
-                    'job_title' => 'required|max:80',
-                    'location' => 'required|max:255',
-                    'email' => 'required|email|max:255|unique:users',
-                    'password' => 'required|confirmed|min:6',
-        ]);
-    }
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return User
-     */
-    public function createUser(Request $request) {
+    public function store(Request $request) {
         $data= $request->all();
 
-        $validator = $this->validator($data);
+        $validator = Validator::make($data, [
+            'name' => 'required|max:255',
+            'job_title' => 'required|max:80',
+            'location' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|confirmed|min:6'
+        ]);
+
         if ($validator->fails()) {
             $this->throwValidationException(
                     $request, $validator
@@ -110,44 +100,92 @@ class UserController extends Controller {
     }
 
     /**
-     * Form to edit users
+     * Display the specified resource.
      *
-     * @return user edit view
+     * @param  int  $id
+     * @return Response
      */
-    function editUser($user_id) {
-        
-        $userExists= User::find($user_id);
+    public function show($id) {
+        //
+    }
 
-        $data['user']=$userExists;
-        
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function edit($id) {
+        $user= User::find($id);
+
+        if($user==null){
+            abort(404);
+        }
+
+        $data['user']=$user;
+
         return View('users/edit', $data);
     }
 
     /**
-     * Save a user personal data.
+     * Update the specified resource in storage.
      *
-     * @param  array  $data
-     * @return User saved
+     * @param  int  $id
+     * @return Response
      */
-    public function saveUser(Request $request) {
-//        $data= $request->all();
-//
-//        $validator = $this->validator($data);
-//        if ($validator->fails()) {
-//            $this->throwValidationException(
-//                    $request, $validator
-//            );
-//        }
-//
-//        User::create([
-//                    'name' => $data['name'],
-//                    'email' => $data['email'],
-//                    'job_title' => $data['job_title'],
-//                    'location' => $data['location'],
-//                    'password' => bcrypt($data['password']),
-//        ]);
+    public function update($id, Request $request) {
+        $user= User::find($id);
+
+        if($user==null){
+            abort(404);
+        }
+
+        $data= $request->all();
+
+        $validator = Validator::make($data, [
+            'name' => 'required|max:255',
+            'job_title' => 'required|max:80',
+            'location' => 'required|max:255'
+        ]);
+
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                    $request, $validator
+            );
+        }
+
+        $user->name= $data['name'];
+        $user->location= $data['location'];
+        $user->job_title= $data['job_title'];
+
+        $user->save();
 
         return redirect('home');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function destroy($id, Request $request) {
+        if ($request->ajax()) {
+            $response= ["status"=>0, "msg"=> "An error has occurred"];
+            
+            $user= User::find($id);
+
+            if($user==null){
+                $response["msg"]="User does not exist.";
+            }
+
+            if($user->delete()){
+                $response= ["status"=>1, "msg"=> "User deleted succesfully!"];
+            }
+
+            return response()->json($response)
+                 ->setCallback($request->input('callback'));
+        }
     }
 
 }

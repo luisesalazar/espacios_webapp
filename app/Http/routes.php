@@ -15,13 +15,14 @@ Route::get('/', 'UserController@index');
 
 Route::get('home', 'UserController@index');
 Route::get('user/list', 'UserController@loadUsers');
-Route::get('user/add', 'UserController@addUser');
-Route::post('user/register', 'UserController@createUser');
-Route::get('user/edit/{user_id}', 'UserController@editUser');
-Route::post('user/save', 'UserController@saveUser');
+Route::get('user/create', 'UserController@create');
+Route::post('user/store', 'UserController@store');
+Route::get('user/edit/{id}', 'UserController@edit');
+Route::post('user/update/{id}', 'UserController@update');
+Route::post('user/destroy/{id}', 'UserController@destroy');
 
 
 Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
 ]);

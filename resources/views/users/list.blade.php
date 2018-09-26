@@ -12,7 +12,7 @@
                         </h2>
                     </div>
                     <div class="col col-md-6 text-right">
-                        <a href="{{ url('user/add') }}" class="btn btn-primary">+Add User</a>
+                        <a href="{{ url('user/create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Add User</a>
                     </div>
                 </div>
                 
